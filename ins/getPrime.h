@@ -6,7 +6,7 @@ void getPrime_simple()
 #endif
 
 #ifdef SQRT
-void getPrime_simple()
+void getPrime_sqrt()
 #endif
 
 #ifdef ERATOSTHENES
