@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\getPrime.exe.dir/objects.a
+C:\Users\53469\mingw\mingw64\bin\ar.exe qc CMakeFiles\getPrime.exe.dir/objects.a @CMakeFiles\getPrime.exe.dir\objects1.rsp
+C:\Users\53469\mingw\mingw64\bin\gcc.exe  -pipe -std=c99 -g -Wl,--whole-archive CMakeFiles\getPrime.exe.dir/objects.a -Wl,--no-whole-archive -o getPrime.exe.exe -Wl,--out-implib,libgetPrime.exe.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\getPrime.exe.dir\linkLibs.rsp
