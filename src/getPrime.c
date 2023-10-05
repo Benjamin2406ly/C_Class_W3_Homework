@@ -4,6 +4,10 @@
 #include <ins\getPrime.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
 
 /*
 **简单遍历
@@ -25,7 +29,7 @@ void getPrime_simple(int n){
 #endif
 
 /*
-**仅遍历到sqrt(n)，节省时间
+**仅遍历到sqrt(n)，节省时间,这个思想后面的方法也用到了
 */
 #ifdef SQRT
 void getPrime_sqrt(int n){
@@ -152,12 +156,47 @@ void getPrime_segment(int n){
 }
 #endif
 
+/*
+**本质上就是线性法
+*/
 #ifdef EULER
-void getPrime_euler()
+void getPrime_euler(int n){
+    getPrime_linear(n);
+}
 #endif
 
-#ifdef BITWISE
-void getPrime_bitwise()
+/*
+**用位图记录合数与素数，1为合数，0为素数，节省内存
+*/
+#ifdef BITMAP
+void getPrime_bitmap(int n){
+    if(n<=1)return false;
+    else{
+        printf("2");
+
+        int bytes_needed = (n + 7) / 8;                     //计算需要的字节数，每个字节8个位，+7是为了保证字节足够
+        
+        uint8_t *bitmap = (uint8_t *)malloc(bytes_needed);  //创建储存位的数组并分配内存
+        memset(bitmap, 0, bytes_needed);                    //1为合数，0为素数
+
+        for(int i=0;i<bytes_needed;i++)bitmap[i] |=0xAA;    //10101010把每个字节里面偶数位先全标记为合数
+
+        for (int i = 3; i * i <= n; i+=2) {
+            if (!(bitmap[i / 8] & (1 << (i % 8)))) {        //bitmap[i / 8] & (1 << (i % 8))表示检查第[i / 8]字节的第(i % 8)位是否为1，比如5就是第一字节第五位，而初始化时第一字节第五位为0，不为1
+                for (int j = i * i; j <= n; j += i) {       //同Eratosthenes法
+                    bitmap[i / 8] |= (1 << (i % 8));        //合数标为1
+                }
+            }
+        }
+
+        for (int i = 3; i <= n; i+=2) {
+            if (!(bitmap[i / 8] & (1 << (i % 8)))) printf("%d ", i);
+        }
+        printf("\n");
+
+        free(bitmap);                                       //释放内存
+    }
+}
 #endif
 
 #ifdef PARALLEL

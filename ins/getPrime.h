@@ -25,7 +25,7 @@ void getPrime_segment()
 void getPrime_euler()
 #endif
 
-#ifdef BITWISE
+#ifdef BITMAP
 void getPrime_bitwise()
 #endif
 
