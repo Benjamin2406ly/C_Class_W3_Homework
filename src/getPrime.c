@@ -61,9 +61,9 @@ void getPrime_eratosthenes(int n){
 
         int i=1;
         do{
-            i++;
+            i+=2;
             if(prime[i]){
-                for(int j=i*i; j<=n; j+=i){
+                for(int j=i*i; j<=n; j+=i){ //从i^2开始，以i递增，这些数都是合数，比如3*2+3=3*4
                     prime[j]=false;
                 }
             }
@@ -88,9 +88,10 @@ void getPrime_linear(int n){
 
         bool prime[n+1];                   //bool数组
         int _prime[n+1];                   //整型数组，用_区分
+        _prime[0]=2;                       //初始化
         memset(prime,true,sizeof(prime));  //初始化
 
-        int count = 0;
+        int count = 1;
 
         for(int i=3;i<=n,i+=2){
             if(prime[i])_prime[count++]=i;               //所有小于等于n的奇数储存在_prime的前面count个位置上
@@ -107,8 +108,48 @@ void getPrime_linear(int n){
 }
 #endif
 
+/*
+**limit之前的合数用Eratosthenes法找，limit之后的合数，以limit前已经找出的素数，用线性法找
+**时间复杂度O(n*log(logn))
+*/
 #ifdef SEGMENT
-void getPrime_segment()
+void getPrime_segment(int n){
+    if(n<=1)return false;
+    else{
+        printf("2");
+
+        int limit=sqrt(n)+1;        //segment上界,向上取整
+        bool prime[limit+1];
+        memset(prime,true,sizeof(prime));
+
+        for(int i=3;i*i<=limit;i+=2){//用上面的eratosthenes法，找到小于等于limit的所有素数
+            if(prime[i])for(int j =i*i;j<=limit;j+=i)prime[j]=false;   //合数
+        }
+
+        int _prime[limit+1];
+        _prime[0]=2;                 //初始化
+        int count = 1;
+
+        for(int i=3;i<=limit;i+=2){
+            if(prime[i])_prime[count++]=i;
+        }
+
+        bool segment[n+1];
+        memset(segment,true,sizeof(segment));  //初始化标记数组
+
+        for(int i=0; i<count;i++){
+            int current_prime = _prime[i];
+            int start=current_prime*current_prime;
+          
+            for(int j=start;j<=n;j+=current_prime)segment[j]=false; 比如3*3+3+3是合数
+        }
+
+        for(int i=2;i<=n;i++){
+            if(segment[i])printf("%d",i);
+        }
+        printf("\n");
+    }
+}
 #endif
 
 #ifdef EULER
