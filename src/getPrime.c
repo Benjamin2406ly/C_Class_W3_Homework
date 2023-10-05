@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <omp.h>
 
 /*
 **简单遍历
@@ -199,6 +200,29 @@ void getPrime_bitmap(int n){
 }
 #endif
 
+/*
+**用OpenMP库进行多线程运行
+*/
 #ifdef PARALLEL
-void getPrime_parallel()
+void getPrime_parallel(int n){
+    if(n<=1)return false;
+    else{
+        bool *prime = (bool *)malloc((n+1)*sizeof(bool));   //bool prime[n+1]换个方式
+        memset(prime,true,sizeof(prime));                   //初始化
+
+        #pragma omp parallel for
+        for(int i=3;i*i<=n;i+=2){
+            if(prime[i]){
+                for(int j=i*i;j<=n:j+=i)prime[j]=false;     //同Eratosthenes法
+            }
+        }
+
+        for(int i=3;i<=n;i+=2){
+            if(prime[i])printf("%d",i);
+        }
+        printf("\n");
+
+        free(prime); 
+    }
+}
 #endif
