@@ -1,7 +1,13 @@
+/*
+**所有方法均排偶
+*/
 #include <ins\getPrime.h>
 #include <stdio.h>
 #include <stdbool.h>
 
+/*
+**简单遍历
+*/
 #ifdef SIMPLE
 void getPrime_simple(int n){
     if(n<=1)return false;
@@ -18,6 +24,9 @@ void getPrime_simple(int n){
 }
 #endif
 
+/*
+**仅遍历到sqrt(n)，节省时间
+*/
 #ifdef SQRT
 void getPrime_sqrt(int n){
     if(n<=1)return false;
@@ -38,6 +47,9 @@ void getPrime_sqrt(int n){
 }
 #endif
 
+/*
+**Eratosthenes法
+*/
 #ifdef ERATOSTHENES
 void getPrime_eratosthenes(int n){
     if(n<=1)return false;
@@ -65,8 +77,34 @@ void getPrime_eratosthenes(int n){
 }
 #endif
 
+/*
+**线性法，网上找的，但不知道为什么叫线性@_@，可能只是因为prime和_prime两个数组都只遍历了一次，时间复杂度为O(n)
+*/
 #ifdef LINEAR
-void getPrime_linear()
+void getPrime_linear(int n){
+    if(n<=1)return false;
+    else{
+        printf("2");
+
+        bool prime[n+1];                   //bool数组
+        int _prime[n+1];                   //整型数组，用_区分
+        memset(prime,true,sizeof(prime));  //初始化
+
+        int count = 0;
+
+        for(int i=3;i<=n,i+=2){
+            if(prime[i])_prime[count++]=i;               //所有小于等于n的奇数储存在_prime的前面count个位置上
+
+            for(int j=0;j<count && i*_prime[j]<=n;j++){  //所有奇数的组合相乘都是合数，全改为false
+                prime[i*_prime[j]]=false;
+                if(i%_prime[j]==0)break;                 //保留素数
+            }
+        }
+
+        for(int i=0;i<count,i++)printf("%d",_prime[i]);
+        printf("\n");
+    }
+}
 #endif
 
 #ifdef SEGMENT
