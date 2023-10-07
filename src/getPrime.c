@@ -1,7 +1,7 @@
 /*
 **所有方法均排偶
 */
-#include <ins\getPrime.h>
+#include "getPrime.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -13,16 +13,25 @@
 /*
 **简单遍历
 */
-#ifdef SIMPLE
+#ifndef SIMPLE
 void getPrime_simple(int n){
-    if(n<=1)return false;
+    if(n<=1)return;
     else{
-        printf("2");
+        printf("2 ");
 //n是输入的数,i是小于等于n的所有奇数，j是为了判断i是否为素数的因子
         for(int i =3;i<=n;i+=2){
-          if(for(int j=3;j<=i;j+=2){if(i%j !== 0)return true}){
-            printf("%d",i);
-          }
+            bool is_prime=true;
+
+            for(int j=2;j<i;j++){
+                if(i%j == 0){
+                is_prime = false;
+                break;
+                }
+            }
+
+            if(is_prime){
+                printf("%d ",i);
+            }
         }
     }
     printf("\n");
@@ -32,14 +41,21 @@ void getPrime_simple(int n){
 /*
 **仅遍历到sqrt(n)，节省时间,这个思想后面的方法也用到了
 */
-#ifdef SQRT
+#ifndef SQRT
 void getPrime_sqrt(int n){
-    if(n<=1)return false;
+    if(n<=1)return;
     else{
         printf("2");
 //n是输入的数,i是小于等于n的所有奇数，j是为了判断i是否为素数的因子
         for(int i =3;i<=n;i+=2){
-          if(for(int j=3;j*j<=i;j+=2){if(i%j !== 0)return true}){
+            bool is_prime=true;
+            for(int j=3;j*j<=i;j+=2){
+                if(i%j == 0)
+                is_prime = false;
+                break;
+            }
+
+            if(is_prime){
 /*          
 与simple方法相比，这里是j*j,相当于只遍历到sqrt(n)节省了时间
 在n比较小时，大于sqrt(n)的因子会成对出现，比如n=a*b，有a>sqrt(n)，b<sqrt(n)，因此在n比较小的时候，该方法更高效
@@ -55,9 +71,9 @@ void getPrime_sqrt(int n){
 /*
 **Eratosthenes法
 */
-#ifdef ERATOSTHENES
+#ifndef ERATOSTHENES
 void getPrime_eratosthenes(int n){
-    if(n<=1)return false;
+    if(n<=1)return;
     else{
         printf("2");
     
@@ -85,9 +101,9 @@ void getPrime_eratosthenes(int n){
 /*
 **线性法，网上找的，但不知道为什么叫线性@_@，可能只是因为prime和_prime两个数组都只遍历了一次，时间复杂度为O(n)
 */
-#ifdef LINEAR
+#ifndef LINEAR
 void getPrime_linear(int n){
-    if(n<=1)return false;
+    if(n<=1)return;
     else{
         printf("2");
 
@@ -98,7 +114,7 @@ void getPrime_linear(int n){
 
         int count = 1;
 
-        for(int i=3;i<=n,i+=2){
+        for(int i=3;i<=n;i+=2){
             if(prime[i])_prime[count++]=i;               //所有小于等于n的奇数储存在_prime的前面count个位置上
 
             for(int j=0;j<count && i*_prime[j]<=n;j++){  //所有奇数的组合相乘都是合数，全改为false
@@ -107,7 +123,7 @@ void getPrime_linear(int n){
             }
         }
 
-        for(int i=0;i<count,i++)printf("%d",_prime[i]);
+        for(int i=0;i<count;i++)printf("%d",_prime[i]);
         printf("\n");
     }
 }
@@ -117,9 +133,9 @@ void getPrime_linear(int n){
 **limit之前的合数用Eratosthenes法找，limit之后的合数，以limit前已经找出的素数，用线性法找
 **时间复杂度O(n*log(logn))
 */
-#ifdef SEGMENT
+#ifndef SEGMENT
 void getPrime_segment(int n){
-    if(n<=1)return false;
+    if(n<=1)return;
     else{
         printf("2");
 
@@ -128,7 +144,7 @@ void getPrime_segment(int n){
         memset(prime,true,sizeof(prime));
 
         for(int i=3;i*i<=limit;i+=2){//用上面的eratosthenes法，找到小于等于limit的所有素数
-            if(prime[i])for(int j =i*i;j<=limit;j+=i)prime[j]=false;   //合数
+            if(prime[i]){for(int j =i*i;j<=limit;j+=i)prime[j]=false;}   //合数
         }
 
         int _prime[limit+1];
@@ -146,7 +162,7 @@ void getPrime_segment(int n){
             int current_prime = _prime[i];
             int start=current_prime*current_prime;
           
-            for(int j=start;j<=n;j+=current_prime)segment[j]=false; 比如3*3+3+3是合数
+            for(int j=start;j<=n;j+=current_prime)segment[j]=false; //比如3*3+3+3是合数
         }
 
         for(int i=2;i<=n;i++){
@@ -160,7 +176,7 @@ void getPrime_segment(int n){
 /*
 **本质上就是线性法
 */
-#ifdef EULER
+#ifndef EULER
 void getPrime_euler(int n){
     getPrime_linear(n);
 }
@@ -169,9 +185,9 @@ void getPrime_euler(int n){
 /*
 **用位图记录合数与素数，1为合数，0为素数，节省内存
 */
-#ifdef BITMAP
+#ifndef BITMAP
 void getPrime_bitmap(int n){
-    if(n<=1)return false;
+    if(n<=1)return;
     else{
         printf("2");
 
@@ -203,9 +219,9 @@ void getPrime_bitmap(int n){
 /*
 **用OpenMP库进行多线程运行
 */
-#ifdef PARALLEL
+#ifndef PARALLEL
 void getPrime_parallel(int n){
-    if(n<=1)return false;
+    if(n<=1)return;
     else{
         bool *prime = (bool *)malloc((n+1)*sizeof(bool));   //bool prime[n+1]换个方式
         memset(prime,true,sizeof(prime));                   //初始化
@@ -213,7 +229,7 @@ void getPrime_parallel(int n){
         #pragma omp parallel for
         for(int i=3;i*i<=n;i+=2){
             if(prime[i]){
-                for(int j=i*i;j<=n:j+=i)prime[j]=false;     //同Eratosthenes法
+                for(int j=i*i;j<=n;j+=i)prime[j]=false;     //同Eratosthenes法
             }
         }
 

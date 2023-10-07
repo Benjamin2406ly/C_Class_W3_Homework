@@ -1,0 +1,31 @@
+CMakeFiles/getPrime.exe.dir/src/getPrime.c.obj: \
+ C:\vscode\C_Class_W3_Homework\src\getPrime.c \
+ C:/vscode/C_Class_W3_Homework/ins/getPrime.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/stdio.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_directx.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/_mingw_print_push.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/_mingw_print_pop.h \
+ C:/Users/53469/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/stdbool.h \
+ C:/Users/53469/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/stdint.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/stdint.h \
+ C:/Users/53469/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/stddef.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/stddef.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/stdlib.h \
+ C:/Users/53469/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/limits.h \
+ C:/Users/53469/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/syslimits.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/limits.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/malloc.h \
+ C:/Users/53469/mingw/mingw64/x86_64-w64-mingw32/include/math.h \
+ C:/Users/53469/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/omp.h

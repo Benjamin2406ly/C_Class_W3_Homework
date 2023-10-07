@@ -14,9 +14,7 @@ add_definitions(-DDEBUG -DREAL_COOL_ENGINEER)
 
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 
-target_include_directories(getPrime.exe PUBLIC
-    ${CMAKE_SOURCE_DIR}/ins 
-    )
+target_include_directories(getPrime.exe PUBLIC "${CMAKE_SOURCE_DIR}/ins")
 
 enable_testing()
 
