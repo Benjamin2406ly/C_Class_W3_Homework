@@ -45,14 +45,15 @@ void getPrime_simple(int n){
 void getPrime_sqrt(int n){
     if(n<=1)return;
     else{
-        printf("2");
+        printf("2 ");
 //n是输入的数,i是小于等于n的所有奇数，j是为了判断i是否为素数的因子
         for(int i =3;i<=n;i+=2){
             bool is_prime=true;
             for(int j=3;j*j<=i;j+=2){
-                if(i%j == 0)
+                if(i%j == 0){
                 is_prime = false;
                 break;
+                }
             }
 
             if(is_prime){
@@ -60,7 +61,7 @@ void getPrime_sqrt(int n){
 与simple方法相比，这里是j*j,相当于只遍历到sqrt(n)节省了时间
 在n比较小时，大于sqrt(n)的因子会成对出现，比如n=a*b，有a>sqrt(n)，b<sqrt(n)，因此在n比较小的时候，该方法更高效
 */
-            printf("%d",i);
+            printf("%d ",i);
           }
         }
     }
@@ -75,7 +76,7 @@ void getPrime_sqrt(int n){
 void getPrime_eratosthenes(int n){
     if(n<=1)return;
     else{
-        printf("2");
+        printf("2 ");
     
         bool prime[n+1];
         memset(prime,true,sizeof(prime));  //初始化
@@ -91,7 +92,7 @@ void getPrime_eratosthenes(int n){
         }while(i*i<=n);
 
         for(int i=3;i<=n;i+=2){
-            if(prime[i])printf("%d",i);
+            if(prime[i])printf("%d ",i);
         }
         printf("\n");
     }

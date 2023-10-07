@@ -7,7 +7,7 @@ int main(){
     clock_t start = clock();
     #endif
 
-    getPrime_simple(100);
+    getPrime_eratosthenes(100);
 
     #ifdef DEBUG
     clock_t end = clock();
