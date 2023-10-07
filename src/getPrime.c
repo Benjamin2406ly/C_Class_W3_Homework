@@ -106,8 +106,6 @@ void getPrime_eratosthenes(int n){
 void getPrime_linear(int n){
     if(n<=1)return;
     else{
-        printf("2");
-
         bool prime[n+1];                   //bool数组
         int _prime[n+1];                   //整型数组，用_区分
         _prime[0]=2;                       //初始化
@@ -124,7 +122,7 @@ void getPrime_linear(int n){
             }
         }
 
-        for(int i=0;i<count;i++)printf("%d",_prime[i]);
+        for(int i=0;i<count;i++)printf("%d ",_prime[i]);
         printf("\n");
     }
 }
@@ -138,8 +136,6 @@ void getPrime_linear(int n){
 void getPrime_segment(int n){
     if(n<=1)return;
     else{
-        printf("2");
-
         int limit=sqrt(n)+1;        //segment上界,向上取整
         bool prime[limit+1];
         memset(prime,true,sizeof(prime));
@@ -167,7 +163,7 @@ void getPrime_segment(int n){
         }
 
         for(int i=2;i<=n;i++){
-            if(segment[i])printf("%d",i);
+            if(segment[i])printf("%d ",i);
         }
         printf("\n");
     }
@@ -199,7 +195,7 @@ void getPrime_bitmap(int n){
 
         for(int i=0;i<bytes_needed;i++)bitmap[i] |=0xAA;    //10101010把每个字节里面偶数位先全标记为合数
 
-        for (int i = 3; i * i <= n; i+=2) {
+        for (int i = 2; i * i <= n; i++) {
             if (!(bitmap[i / 8] & (1 << (i % 8)))) {        //bitmap[i / 8] & (1 << (i % 8))表示检查第[i / 8]字节的第(i % 8)位是否为1，比如5就是第一字节第五位，而初始化时第一字节第五位为0，不为1
                 for (int j = i * i; j <= n; j += i) {       //同Eratosthenes法
                     bitmap[i / 8] |= (1 << (i % 8));        //合数标为1
@@ -224,18 +220,27 @@ void getPrime_bitmap(int n){
 void getPrime_parallel(int n){
     if(n<=1)return;
     else{
-        bool *prime = (bool *)malloc((n+1)*sizeof(bool));   //bool prime[n+1]换个方式
-        memset(prime,true,sizeof(prime));                   //初始化
+        printf("2 ");
 
-        #pragma omp parallel for
-        for(int i=3;i*i<=n;i+=2){
-            if(prime[i]){
-                for(int j=i*i;j<=n;j+=i)prime[j]=false;     //同Eratosthenes法
+        bool *prime = (bool *)malloc((n+1)*sizeof(bool));   //bool prime[n+1]换个方式
+        memset(prime,true,(n+1)*sizeof(bool));                   //初始化
+
+        #pragma omp parallel
+        {
+            #pragma omp for
+            for(int i=3;i*i<=n;i+=2){
+                if(prime[i]){
+                    for(int j=i*i;j<=n;j+=i)prime[j]=false;     //同Eratosthenes法
+                }
             }
         }
 
-        for(int i=3;i<=n;i+=2){
-            if(prime[i])printf("%d",i);
+        #pragma omp parallel
+        {
+            #pragma omp for
+            for(int i=3;i<=n;i+=2){
+                if(prime[i])printf("%d ",i);
+            }
         }
         printf("\n");
 
