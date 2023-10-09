@@ -7,7 +7,7 @@ int main(){
     clock_t start = clock();
     #endif
 
-    getPrime_parallel(10000000);
+    getPrime_parallel(10000);
 
     #ifdef DEBUG
     clock_t end = clock();
